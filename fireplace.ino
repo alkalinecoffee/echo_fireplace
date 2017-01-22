@@ -1,14 +1,12 @@
-#include <ESP8266WebServer.h>
-#include <ESP8266WiFi.h>
-#include <functional>
 #include <RCSwitch.h>
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
 #include <WiFiUdp.h>
+#include <functional>
 
 void prepareIds();
-
 boolean connectWifi();
 boolean connectUDP();
-
 void startHttpServer();
 void turnOnDevice();
 void turnOffDevice();
@@ -22,10 +20,6 @@ const char* onCode = "111101111010001110110001";
 const char* offCode = "111101111010001110110011";
 const int transmitPin = 12;
 const int pulseLength = 438;
-const int keepAliveSec = 600; // seconds... how long between sending keepalive messages when activated
-
-boolean deviceOn = false;
-int heartbeatSentAt;
 
 RCSwitch mySwitch = RCSwitch();
 
@@ -103,7 +97,7 @@ void loop() {
         int len = UDP.read(packetBuffer, 255);
 
         if (len > 0) {
-            packetBuffer[len] = 0;
+          packetBuffer[len] = 0;
         }
 
         String request = packetBuffer;
@@ -119,13 +113,7 @@ void loop() {
       delay(10);
     }
   } else {
-    connectWifi();
-  }
-
-  if(deviceOn) {
-    if(heartbeatSentAt < (millis() - (keepAliveSec * 1000))) {
-      turnOnDevice;
-    }
+      // Turn on/off to indicate cannot connect ..
   }
 }
 
@@ -270,7 +258,6 @@ void startHttpServer() {
     Serial.println("HTTP Server started ..");
 }
 
-
 // connect to wifi – returns true if successful or false if not
 boolean connectWifi(){
   boolean state = true;
@@ -328,12 +315,9 @@ boolean connectUDP(){
 void turnOnDevice() {
   digitalWrite(ledPin, false);
   mySwitch.send(onCode);
-  deviceOn = true;
-  heartbeatSentAt = millis();
 }
 
 void turnOffDevice() {
   digitalWrite(ledPin, true);
   mySwitch.send(offCode);
-  deviceOn = false;
 }
