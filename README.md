@@ -7,6 +7,8 @@ The purpose of this project is to control a gas fireplace via an Amazon Echo. Th
 
 This solution was developed and tested against a Heat & Glo gas fireplace with [Skytech Smart-Stat II fireplace remote control](http://amzn.to/2jRKULh).
 
+An in-depth tutorial in how to use this library can be found at https://www.youtube.com/watch?v=hTDtSgqbBic.
+
 Tools
 ---
 - [Amazon Echo](http://amzn.to/2iFdL7G) (or [Dot](http://amzn.to/2ivlQ0k))
