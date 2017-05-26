@@ -51,7 +51,7 @@ ESP8266 (12E) | TX303A
 GND           | 2 - GND
 D6 (GPIO12)   | 3 - RF In
 GND           | 4 - GND
-              | 5 - RF Out (loose wire)
+<unused>      | 5 - RF Out (loose wire)
 
 Credits
 ---
